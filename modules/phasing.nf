@@ -13,9 +13,9 @@ process beagle{
     bcftools view ${refvcf} -Ov -o ${refvcf.simpleName}.vcf --threads ${task.cpus}
     awk '{print "chr"\$0}' ${map} > ${map}.chr
     beagle -Xmx${memory}g gt=${unphased.simpleName}.vcf \
-        out=phased_${unphased.simpleName} impute=false ref=${refvcf.simpleName}.vcf \
+        out=phased_${chr} impute=false ref=${refvcf.simpleName}.vcf \
         nthreads=${task.cpus} chrom=${chr} map=${map}.chr
-    bcftools index phased_${unphased.simpleName}.vcf.gz --threads ${task.cpus}
+    bcftools index phased_${chr}.vcf.gz --threads ${task.cpus}
     """
     stub:
     """
