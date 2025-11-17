@@ -1,5 +1,5 @@
 include {fill_AC; remove_duplicates; remove_missing; create_index;
-    create_index_1000G } from "../modules/preprocessing"
+    create_index_1000G; fasta_index; reheader; get_contigs} from "../modules/preprocessing"
 
 workflow preprocessing_unphased{
     take:

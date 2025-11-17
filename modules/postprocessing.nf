@@ -3,16 +3,19 @@ process concatenate_phased {
     input:
     path(vcf_files)
     val(output_prefix)
+    tuple path(fasta), path(fasta_index)
     output:
-    tuple path("${output_prefix}.bcf"), path("${output_prefix}.bcf.csi"), emit: phased_variants
+    tuple path("${output_prefix}.vcf.gz"), path("${output_prefix}.vcf.gz.csi"), emit: phased_variants
     script:
     """
-    bcftools concat -Ob -o merged_variants.bcf ${vcf_files.collect{it}.join(' ')} -W --threads ${task.cpus}
-    bcftools sort -Ob -o ${output_prefix}.bcf merged_variants.bcf -W
+    bcftools concat --naive \\
+        -Oz -o merged_variants.vcf.gz ${vcf_files.collect{it}.join(' ')} --threads ${task.cpus}
+    bcftools reheader merged_variants.vcf.gz -f ${fasta_index} -o temp.vcf.gz
+    bcftools sort -Oz -o ${output_prefix}.vcf.gz temp.vcf.gz -W
     """
     stub:
     """
-    touch ${output_prefix}.bcf
-    touch ${output_prefix}.bcf.csi
-    """                 
+    touch ${output_prefix}.vcf.gz
+    touch ${output_prefix}.vcf.gz.csi
+    """
 }
