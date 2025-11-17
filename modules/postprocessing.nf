@@ -16,19 +16,3 @@ process concatenate_phased {
     touch ${output_prefix}.bcf.csi
     """                 
 }
-process publish {
-    publishDir "$params.outdir/${output_folder}/", mode:"copy"
-    input:
-    tuple val(chr), path(input_file), path(input_file_index), path(refvcf), path(refvcfindex), path(map)
-    val(output_folder)
-    output:
-    path(input_file)
-    script:
-    """
-    echo "Publishing"
-    """
-    stub:
-    """
-    echo "Publishing"
-    """
-}
