@@ -1,5 +1,5 @@
-include { fix_ploidy; fill_AC; remove_duplicates; remove_missing; create_index;
-    create_index_1000G; convert_to_vcf; clean; remove_same_ref_alt; remove_multiallelic_snps } from "../modules/preprocessing"
+include {fill_AC; remove_duplicates; remove_missing; create_index;
+    create_index_1000G } from "../modules/preprocessing"
 
 workflow preprocessing_unphased{
     take:
