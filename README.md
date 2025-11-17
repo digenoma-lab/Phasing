@@ -1,5 +1,9 @@
 # Phasing Pipeline
 
+
+<img src="imgs/logo.png" alt="Phasing Pipeline" width="50%"/>
+
+
 A Nextflow pipeline for phasing unphased genotype data using Beagle with reference panels from the 1000 Genomes Project.
 
 ## Overview
