@@ -1,3 +1,4 @@
 vcf_unphased: ./data/CHI_64_DV_DBSNP_biallelic.vcf.gz
 refcsv: ./params/files_beagle.csv
 outdir: ./results/
+output_prefix: Chilean
