@@ -3,4 +3,3 @@ refcsv: ./params/1000G.csv
 outdir: ./results/
 output_prefix: miquel
 fasta: "/mnt/beegfs/labs/DiGenomaLab/Chilean_ref/analysis/GWAS/REFERENCE/CHI/convert2hg38/references/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna"
-include_X: true
