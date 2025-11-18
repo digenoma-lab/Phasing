@@ -126,3 +126,20 @@ process reheader {
     touch header_${vcf}.tbi
     """
 }
+process fix_ploidy {
+    input:
+    tuple path(array), path(array_index)
+    output:
+    tuple path("ploidy_${array.simpleName}.vcf.gz"), path("ploidy_${array.simpleName}.vcf.gz.csi"), emit: vcf
+    script:
+    """
+    echo "chrX 1 156040895 M 2" > ploidy.txt
+    bcftools +fixploidy ${array}  --threads ${task.cpus} -Ov -- -p ploidy.txt | bcftools view -i 'ALT !="-" & ALT !="."' --threads ${task.cpus} | bcftools sort -Oz -o ploidy_${array.simpleName}.vcf.gz -W 
+    """
+    stub:
+    """
+    echo "chrX 1 156040895 M 2" > ploidy.txt
+    echo "bcftools +fixploidy ${array} --threads ${task.cpus} -Ov -- -p ploidy.txt| bcftools view -i 'ALT !=\"-\" & ALT !=\".\"' --threads ${task.cpus} | bcftools sort -Ob -o GWAS_diploid.bcf -W"  > ploidy_${array.simpleName}.vcf.gz
+    touch ploidy_${array.simpleName}.vcf.gz.csi
+    """
+}
