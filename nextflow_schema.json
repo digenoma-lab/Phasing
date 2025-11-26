@@ -26,7 +26,7 @@
           "format": "file-path",
           "exists": true,
           "mimetype": "text/csv",
-          "description": "Path to CSV file with reference panel information",
+          "description": "<div style='background-color:#e6f2ff; border-left: 4px solid #3399ff; padding: 12px; border-radius: 6px; margin-top: 10px;'><strong>Path to reference CSV file (example.csv):</strong><br><pre style='background:#f4f4f4; padding:8px; border-radius:5px;'>chr,ref_vcf,ref_vcf_index,gmap\n\n1,/path/to/chr1_ref.vcf.gz,/path/to/chr1_ref.vcf.gz.csi,/path/to/chr1.gmap\n\n2,/path/to/chr2_ref.vcf.gz,/path/to/chr2_ref.vcf.gz.csi,/path/to/chr2.gmap\n\n...</pre></div>",
           "pattern": "^\\S+\\.csv$",
           "help_text": "CSV file with columns: chr, ref_vcf, ref_vcf_index, gmap. Each row specifies reference panel files for a chromosome.",
           "fa_icon": "fas fa-file-csv",
