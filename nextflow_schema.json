@@ -1,0 +1,80 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Phasing Pipeline Parameters",
+  "description": "Schema for Phasing Pipeline parameters",
+  "type": "object",
+  "definitions": {
+    "input_output_options": {
+      "title": "Input/Output Options",
+      "type": "object",
+      "description": "Define the input data and output locations",
+      "fa_icon": "fas fa-terminal",
+      "properties": {
+        "vcf_unphased": {
+          "type": "string",
+          "format": "file-path",
+          "exists": true,
+          "mimetype": "text/plain",
+          "description": "Path to unphased VCF/BCF file (must be indexed with .csi file)",
+          "pattern": "^\\S+\\.(vcf\\.gz|bcf)$",
+          "help_text": "The input VCF/BCF file containing unphased genotypes. Must have a corresponding .csi index file.",
+          "fa_icon": "far fa-file-code",
+          "errorMessage": "The VCF file path must end with .vcf.gz or .bcf, must not contain spaces, and must exist."
+        },
+        "refcsv": {
+          "type": "string",
+          "format": "file-path",
+          "exists": true,
+          "mimetype": "text/csv",
+          "description": "Path to CSV file with reference panel information",
+          "pattern": "^\\S+\\.csv$",
+          "help_text": "CSV file with columns: chr, ref_vcf, ref_vcf_index, gmap. Each row specifies reference panel files for a chromosome.",
+          "fa_icon": "fas fa-file-csv",
+          "errorMessage": "The CSV file path must end with .csv, must not contain spaces, and must exist."
+        },
+        "fasta": {
+          "type": "string",
+          "format": "file-path",
+          "exists": true,
+          "mimetype": "text/plain",
+          "description": "Path to reference FASTA file",
+          "pattern": "^\\S+\\.fn?a(sta)?(\\.gz)?$",
+          "help_text": "Reference genome FASTA file used for postprocessing and indexing.",
+          "fa_icon": "far fa-file-code",
+          "errorMessage": "The FASTA file path must end with .fa, .fna, .fasta optionally with .gz, must not contain spaces, and must exist."
+        },
+        "output_prefix": {
+          "type": "string",
+          "format": "text_field",
+          "minLength": 1,
+          "description": "Prefix for output files",
+          "help_text": "Prefix used for naming the final phased output VCF file (e.g., 'phased_output' will produce 'phased_output.vcf.gz').",
+          "fa_icon": "fas fa-tag",
+          "errorMessage": "The output prefix must be at least 1 character long and cannot be empty."
+        },
+        "outdir": {
+          "type": "string",
+          "format": "directory-path",
+          "minLength": 1,
+          "description": "Output directory for pipeline results",
+          "default": "./results/",
+          "help_text": "Directory where all pipeline output files will be saved, including phased VCFs and pipeline execution reports.",
+          "fa_icon": "fas fa-folder-open",
+          "errorMessage": "The output directory path must be at least 1 character long."
+        }
+      },
+      "required": [
+        "vcf_unphased",
+        "refcsv",
+        "fasta",
+        "output_prefix"
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "#/definitions/input_output_options"
+    }
+  ]
+}
+
